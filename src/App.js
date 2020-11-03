@@ -16,12 +16,9 @@ export default class App extends Component {
     const goodBoyData = await fetch.get(url);
 
     await this.setState({
-      goodBoyData: JSON.parse(goodBoyData.text),
+      goodBoyData: goodBoyData.body,
       loading: false,
     })
-    console.log('------------------------------------');
-    console.log(`this.state.goodBoyData:  ${this.state.goodBoyData[0].img_src}`);
-    console.log('------------------------------------');
   }
 
 
