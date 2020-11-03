@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Paper, CardContent, Typography } from '@material-ui/core';
 import Boolean from './Boolean.js'
-import { cardStyling, paperStyling, divImageStyling } from './constants.js'
+import { cardStyling, paperStyling } from './constants.js'
 
 
 export default class GoodBoyGallery extends Component {
