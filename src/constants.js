@@ -15,10 +15,20 @@ export const paperStyling = {
 
 }
 
+export const cardContentStyling = {
+    width: '160',
+    height: '300px',
+    color: 'white',
+    display: 'grid',
+    gridTemplateRows: '7fr .1fr 1fr',
+
+}
+
 export const divImageStyling = {
     width: '100%',
     height: 'auto',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'auto 100%',
+    maringBottom: '10px',
 }
