@@ -12,6 +12,7 @@ export const cardStyling = {
 
 export const paperStyling = {
     display: 'flex',
+    flexWrap: 'wrap',
 
 }
 
