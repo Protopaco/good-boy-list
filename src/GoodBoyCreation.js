@@ -16,25 +16,45 @@ export default class GoodBoyCreation extends Component {
         img_src: 0,
         owner_id: 0,
         good_boy: true,
-        breed_id: 0,
+        breedName: ''
     }
 
     handleFormSubmit = async (e) => {
         e.preventDefault();
         const postURL = this.state.API_URL + '/dogs/'
 
-        await fetch.post(postURL)
-            .send({
-                name: this.state.name,
-                age: this.state.age,
-                weight: this.state.weight,
-                good_boy: this.state.good_boy,
-                breed_id: this.state.breed_id,
-                img_src: '',
-                owner_id: 1
-            });
+        let entered_breed_id = this.returnBreedID()
 
+        const objectToSend = {
+            name: this.state.name,
+            age: this.state.age,
+            weight: this.state.weight,
+            good_boy: this.state.good_boy,
+            breed_id: entered_breed_id,
+            img_src: this.state.img_src,
+            owner_id: 1
+        }
+            ;
+        try {
+            await fetch.post(postURL)
+                .send(objectToSend);
+        } catch (e) {
+            alert(e.message);
+        }
+        this.props.history.push('/');
     };
+
+
+    returnBreedID() {
+
+        for (let breed of this.state.breedsData) {
+
+            if (breed.name === this.state.breedName) {
+                return breed.id;
+            }
+        }
+    }
+
 
     componentDidMount = async () => {
 
@@ -70,12 +90,12 @@ export default class GoodBoyCreation extends Component {
                                     required />
                                 <FormControl>
                                     <Select
-                                        value={this.state.breedsData[0].id}
+                                        value={this.state.breedName}
                                         id='breed'
                                         required
-                                        onChange={(e) => this.setState({ breed_id: e.target.value })}>
+                                        onChange={(e) => this.setState({ breedName: e.target.value })}>
                                         {this.state.breedsData.map((breed) => {
-                                            return <MenuItem key={breed.id} value={breed.id}>{breed.name}</MenuItem>
+                                            return <MenuItem key={breed.id} value={breed.name}>{breed.name}</MenuItem>
                                         })};
                                 </Select>
                                     <FormHelperText>breed</FormHelperText>
@@ -106,11 +126,10 @@ export default class GoodBoyCreation extends Component {
                                         id='good_boy'
                                         label="is he a good boy?"
                                         required
-                                        value='true'
+                                        value={this.state.good_boy}
                                         onChange={(e) => { this.setState({ good_boy: e.target.value }) }}>
                                         <MenuItem key='1' value='true'>of course!</MenuItem>
-                                        <MenuItem key='2' value='true'>the best boy!</MenuItem>
-                                        <MenuItem key='3' value='true'>an AMAZING boy!</MenuItem>
+
                                     </Select>
                                     <FormHelperText>is he a good boy?</FormHelperText>
                                 </FormControl>
