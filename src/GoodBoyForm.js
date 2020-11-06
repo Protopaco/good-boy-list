@@ -12,7 +12,9 @@ export default class GoodBoyForm extends Component {
                         onSubmit={this.props.handleFormSubmit}
                         style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', height: '400px' }}>
 
-                        <TextField id="name-field" label="name"
+                        <TextField id="name-field"
+                            label="name"
+                            value={this.props.currentState.name}
                             onChange={(e) => this.props.handleUpdateStateFromForm({ name: e.target.value })}
                             required />
                         <FormControl>
@@ -22,20 +24,23 @@ export default class GoodBoyForm extends Component {
                                 required
                                 onChange={(e) => this.props.handleUpdateStateFromForm({ breedName: e.target.value })}>
                                 {this.props.currentState.breedsData.map((breed) => {
+
                                     return <MenuItem key={breed.id} value={breed.name}>{breed.name}</MenuItem>
                                 })};
-                    </Select>
+                            </Select>
                             <FormHelperText>breed</FormHelperText>
                         </FormControl>
                         <TextField
                             id="age"
                             label="age"
+                            value={this.props.currentState.age}
                             onChange={(e) => this.props.handleUpdateStateFromForm({ age: e.target.value })}
                             type='number'
                             required />
                         <TextField
                             id="weight"
                             label="weight"
+                            value={this.props.currentState.weight}
                             onChange={(e) => this.props.handleUpdateStateFromForm({ weight: e.target.value })}
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">lbs</InputAdornment>
@@ -46,6 +51,7 @@ export default class GoodBoyForm extends Component {
                         <TextField
                             id="img_src"
                             label="image source"
+                            value={this.props.currentState.img_src}
                             onChange={(e) => this.props.handleUpdateStateFromForm({ img_src: e.target.value })}
                             required />
                         <FormControl>
