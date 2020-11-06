@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoodBoyForm from './GoodBoyForm.js';
-import { fetchPutDog, fetchGetBreeds, fetchDogById } from './fetch-suite.js';
+import { fetchPutDog, fetchGetBreeds, fetchDogById, fetchDeleteDog } from './fetch-suite.js';
+
 
 export default class GoodBoyUpdate extends Component {
 
@@ -8,13 +9,14 @@ export default class GoodBoyUpdate extends Component {
         breedsData: [],
         loading: true,
         name: '',
-        age: 0,
-        weight: 0,
-        img_src: 0,
-        owner_id: 0,
+        age: '',
+        weight: '',
+        img_src: '',
+        owner_id: '',
         good_boy: true,
         breedName: '',
-        id: 0
+        id: '',
+        deleteButton: true
     }
 
     handleFormSubmit = async (e) => {
@@ -41,6 +43,11 @@ export default class GoodBoyUpdate extends Component {
         this.props.history.push('/');
     };
 
+    handleDeleteButton = async () => {
+        await fetchDeleteDog(this.state.id);
+        this.props.history.push('/');
+    }
+
     handleUpdateStateFromForm = (object) => {
         this.setState(object);
     }
@@ -49,8 +56,6 @@ export default class GoodBoyUpdate extends Component {
         const dog_id = this.props.match.params.dog_id;
         const dogDetails = await fetchDogById(dog_id);
         const breedsData = await fetchGetBreeds();
-
-        let breedName = breedsData.body.find(breed => breed.id === dogDetails.body.id);
 
         await this.setState({
             breedsData: breedsData.body,
@@ -61,7 +66,7 @@ export default class GoodBoyUpdate extends Component {
             img_src: dogDetails.body.img_src,
             owner_id: 0,
             good_boy: true,
-            breedName: breedName.name,
+            breedName: dogDetails.body.breed,
             id: dogDetails.body.id,
         })
 
@@ -75,14 +80,16 @@ export default class GoodBoyUpdate extends Component {
                     ?
                     <img alt="loading" src="https://i.giphy.com/media/3og0ID5AW1SmPuG3u0/giphy.gif?cid=ecf05e47b5b0ex9wqs3i8hteisz4h9a4fccgal6ncy1szb5v&rid=giphy.gif" />
                     :
-                    <GoodBoyForm
-                        handleFormSubmit={this.handleFormSubmit}
-                        handleUpdateStateFromForm={this.handleUpdateStateFromForm}
-                        formLabel="Want to edit a good boy?!"
-                        currentState={this.state}
-                    />
+                    <>
+                        <GoodBoyForm
+                            handleFormSubmit={this.handleFormSubmit}
+                            handleUpdateStateFromForm={this.handleUpdateStateFromForm}
+                            formLabel="Want to edit a good boy?!"
+                            currentState={this.state}
+                            handleDeleteButton={this.handleDeleteButton}
+                        />
 
-
+                    </>
                 }
 
             </>

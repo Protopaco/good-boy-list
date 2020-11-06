@@ -25,3 +25,7 @@ export async function fetchPutDog(objectToUpdate, id) {
 export async function fetchDogById(dog_id) {
     return await fetch.get(API_URL + '/dogs/' + dog_id);
 }
+
+export async function fetchDeleteDog(dog_id) {
+    await fetch.delete(API_URL + '/dogs/' + dog_id);
+}

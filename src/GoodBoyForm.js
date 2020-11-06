@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Paper, TextField, Typography, InputAdornment, Select, MenuItem, Card, FormHelperText, FormControl } from '@material-ui/core'
+import { Button, Paper, TextField, Typography, InputAdornment, Select, MenuItem, Card, Link, FormHelperText, FormControl } from '@material-ui/core'
 
 
 export default class GoodBoyForm extends Component {
@@ -68,6 +68,18 @@ export default class GoodBoyForm extends Component {
                         </FormControl>
 
                         <Button variant='contained' type='submit' color='primary'>Submit</Button>
+                        {this.props.currentState.deleteButton ?
+                            <Button
+                                variant='contained'
+                                color='primary'
+                                component={Link}
+                                onClick={async () => {
+                                    this.props.handleDeleteButton()
+                                }}
+                            >Delete
+                        </Button>
+                            : <> </>
+                        }
                     </form>
                 </Card>
             </Paper >

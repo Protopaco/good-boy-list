@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { Button, Paper, TextField, Typography, InputAdornment, Select, MenuItem, Card, FormHelperText, FormControl } from '@material-ui/core';
 import GoodBoyForm from './GoodBoyForm.js';
 import { fetchPostDog, fetchGetBreeds } from './fetch-suite.js';
 
@@ -11,10 +10,10 @@ export default class GoodBoyCreation extends Component {
         breedsData: [],
         loading: true,
         name: '',
-        age: 0,
-        weight: 0,
-        img_src: 0,
-        owner_id: 0,
+        age: '',
+        weight: '',
+        img_src: '',
+        owner_id: '',
         good_boy: true,
         breedName: ''
     }
@@ -36,12 +35,13 @@ export default class GoodBoyCreation extends Component {
         }
 
         try {
-            fetchPostDog(objectToSend);
+            await fetchPostDog(objectToSend);
         } catch (e) {
             alert(e.message);
         }
         this.props.history.push('/');
     };
+
 
     handleUpdateStateFromForm = (object) => {
         this.setState(object);
@@ -71,6 +71,7 @@ export default class GoodBoyCreation extends Component {
                         handleUpdateStateFromForm={this.handleUpdateStateFromForm}
                         formLabel="Want to add a good boy?!"
                         currentState={this.state}
+
                     />
                 }
             </>
