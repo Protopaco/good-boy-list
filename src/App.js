@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import GoodBoyGallery from './GoodBoyGallery.js'
 import GoodBoyCreation from './GoodBoyCreation.js'
+import GoodBoyUpdate from './GoodBoyUpdate.js'
 import {
   BrowserRouter as Router,
   Route,
@@ -24,6 +25,11 @@ export default class App extends Component {
               path="/create"
               exact
               render={(routerProps) => <GoodBoyCreation {...routerProps} />}
+            />
+            <Route
+              path="/edit/:dog_id"
+              exact
+              render={(routerProps) => <GoodBoyUpdate {...routerProps} />}
             />
           </Switch>
         </Router>

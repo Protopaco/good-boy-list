@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Paper, CardContent, Typography, Button } from '@material-ui/core';
 import Boolean from './Boolean.js'
-import fetch from 'superagent';
+import { fetchGetDogs } from './fetch-suite.js';
 import { Link } from 'react-router-dom';
 import { cardStyling, paperStyling, cardContentStyling, divImageStyling } from './constants.js'
 
@@ -14,8 +14,7 @@ export default class GoodBoyGallery extends Component {
 
     componentDidMount = async () => {
 
-        const url = 'https://protected-fortress-51085.herokuapp.com/dogs/';
-        const goodBoyData = await fetch.get(url);
+        const goodBoyData = await fetchGetDogs();
 
         await this.setState({
             goodBoyData: goodBoyData.body,
@@ -52,6 +51,14 @@ export default class GoodBoyGallery extends Component {
                                                 {`weight: ${goodBoy.weight}`}
                                             </Typography>
                                             <Boolean good_boy={goodBoy.good_boy}></Boolean>
+                                            <Button
+                                                variant='contained'
+                                                color='primary'
+                                                component={Link}
+                                                to={`/edit/${goodBoy.id}`}
+                                            >
+                                                Edit
+                                            </Button>
                                         </div>
                                     </CardContent>
                                 </Card>
