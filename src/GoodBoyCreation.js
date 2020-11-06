@@ -15,7 +15,8 @@ export default class GoodBoyCreation extends Component {
         img_src: '',
         owner_id: '',
         good_boy: true,
-        breedName: ''
+        breedName: '',
+        formSubmitButtonLabel: 'Submit'
     }
 
     handleFormSubmit = async (e) => {

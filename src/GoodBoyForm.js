@@ -67,7 +67,7 @@ export default class GoodBoyForm extends Component {
                             <FormHelperText>is he a good boy?</FormHelperText>
                         </FormControl>
 
-                        <Button variant='contained' type='submit' color='primary'>Submit</Button>
+                        <Button variant='contained' type='submit' color='primary'>{this.props.currentState.formSubmitButtonLabel}</Button>
                         {this.props.currentState.deleteButton ?
                             <Button
                                 variant='contained'

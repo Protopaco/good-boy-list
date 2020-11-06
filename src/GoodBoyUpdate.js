@@ -16,7 +16,8 @@ export default class GoodBoyUpdate extends Component {
         good_boy: true,
         breedName: '',
         id: '',
-        deleteButton: true
+        deleteButton: true,
+        formSubmitButtonLabel: 'Update'
     }
 
     handleFormSubmit = async (e) => {
